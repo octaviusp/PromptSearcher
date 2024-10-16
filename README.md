@@ -46,27 +46,17 @@ This tool can be particularly useful in various fields where prompt engineering 
    poetry install
    ```
 
-4. Run the main script:
+4. Create a `.env` file in the project root directory and add your API keys:
    ```
-   poetry run python tests/main.py
+   GROQ_API_KEY=your_groq_api_key
+   OPENAI_API_KEY=your_openai_api_key
    ```
 
-## Contributing
+5. Run the main script:
+   ```
+   poetry run python prompt_searcher.py
+   ```
 
-We welcome contributions to PromptSearcher! Please follow these steps to contribute:
+## Example Usage
 
-1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Make your changes and commit them with a clear commit message
-4. Push your changes to your fork
-5. Create a pull request to the main repository
-
-Please ensure your code follows the project's coding standards and includes appropriate tests.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-# Author
-
-Octavio Pavon - [octaviusp](https://github.com/octaviusp)
+Here is an example of how to use PromptSearcher in your project:

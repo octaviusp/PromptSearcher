@@ -2,16 +2,12 @@ from prompt_searcher.core.interfaces.loss import LossFunction
 from prompt_searcher.core.interfaces.agent import Agent
 
 class Backpropagation:
-    def __init__(self, model: Agent, loss_function: LossFunction):
-        self.model = model
-        self.loss_function = loss_function
+    def __init__(self, augmentator: Agent):
+        self.model = augmentator
 
     def optimize_prompt(self,
                         current_prompt: str,
-                        score: int,
-                        x: list[str],
-                        y_pred: list[str],
-                        y_true: list[str]):
+                        score: int):
 
         computed_score_natural = f"The current score of the prompt based on the criteria is: {score}"
         system_message = "You are an AI assistant tasked with improving a prompt. Your goal is to create an enhanced version of the given prompt that better aligns with the desired outputs. Ensure consistency and remove any contradictions in the system prompt."
@@ -33,7 +29,7 @@ class Backpropagation:
 
         Remove any inconsistencies or contradictions in the system prompt to maintain coherence and clarity.
 
-        Provide only the optimized prompt in your response, without any additional explanation or examples from the original inputs and outputs.
+        Provide only the optimized prompt in your response, without any additional explanation or examples. The prompt must be ready to use in the final stage, without any labels or placeholders to complete. Your response should contain only the final prompt, ready for production use.
 
         The optimized prompt is:"""
 

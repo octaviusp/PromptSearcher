@@ -9,16 +9,16 @@ class ObjectivePrompt:
     def __str__(self) -> str:
         return self.current_prompt
 
-    def set_init_loss(self, loss_score: float) -> None:
+    def put_loss_to_last_prompt(self, loss_score: float) -> None:
         """
-        Set the loss score for the initial prompt.
+        Put the loss score to the last prompt.
 
         Args:
-            loss_score (float): The loss score associated with the initial prompt.
+            loss_score (float): The loss score associated with the last prompt.
         """
-        self.history[0] = (self.history[0][0], loss_score)
+        self.history[-1] = (self.history[-1][0], loss_score)
 
-    def update(self, new_prompt: str, loss_score: float) -> None:
+    def update(self, new_prompt: str) -> None:
         """
         Update the current prompt and maintain a history of previous prompts with their loss scores.
 
@@ -27,7 +27,7 @@ class ObjectivePrompt:
             loss_score (float): The loss score associated with the previous prompt.
         """
         self.current_prompt = new_prompt
-        self.history.append((new_prompt, loss_score))
+        self.history.append((new_prompt, 0))
 
     def get_last_prompt(self) -> str:
         """

@@ -21,6 +21,7 @@ class GroqAgent(Agent):
             {"role": "system", "content": system_message},
             {"role": "user", "content": user_message}
         ]
+
         completion = self.client.chat.completions.create(
             model=self.model,
             messages=messages
