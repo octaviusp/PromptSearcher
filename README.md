@@ -30,12 +30,43 @@ This tool can be particularly useful in various fields where prompt engineering 
 
 ## Getting Started
 
-(Add installation and usage instructions here)
+1. Install Poetry if you haven't already:
+   ```
+   pip install poetry
+   ```
+
+2. Clone the repository and navigate to the project directory:
+   ```
+   git clone https://github.com/octaviusp/PromptSearcher.git
+   cd promptsearcher
+   ```
+
+3. Install the project dependencies:
+   ```
+   poetry install
+   ```
+
+4. Run the main script:
+   ```
+   poetry run python tests/main.py
+   ```
 
 ## Contributing
 
-(Add contribution guidelines here)
+We welcome contributions to PromptSearcher! Please follow these steps to contribute:
+
+1. Fork the repository
+2. Create a new branch for your feature or bug fix
+3. Make your changes and commit them with a clear commit message
+4. Push your changes to your fork
+5. Create a pull request to the main repository
+
+Please ensure your code follows the project's coding standards and includes appropriate tests.
 
 ## License
 
-(Add license information here)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+# Author
+
+Octavio Pavon - [octaviusp](https://github.com/octaviusp)
