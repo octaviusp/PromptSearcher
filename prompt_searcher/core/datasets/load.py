@@ -66,3 +66,47 @@ def load_dataset(file_path: str) -> list:
         data_list.append((row['prompt'], row['response']))
     
     return data_list
+
+def load_unsupervised_dataset(file_path: str) -> list:
+    """
+    Load data from a CSV, Excel, or JSON file and return a list of prompts.
+
+    Args:
+        file_path (str): The path to the CSV, Excel, or JSON file.
+
+    Returns:
+        list: A list of prompts.
+
+    Raises:
+        ValueError: If the file format is not supported.
+
+    The JSON file should have the following format:
+    [
+        {"prompt": "Prompt1"},
+        {"prompt": "Prompt2"},
+        ...
+    ]
+
+    The CSV or Excel file should have the following format:
+    Prompt1
+    Prompt2
+    ...
+    """
+    data_list = []
+    if file_path.endswith('.csv'):
+        df = pl.read_csv(file_path)
+    elif file_path.endswith('.xlsx') or file_path.endswith('.xls'):
+        df = pl.read_excel(file_path)
+    elif file_path.endswith('.json'):
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        for item in data:
+            data_list.append(item['prompt'])
+        return data_list
+    else:
+        raise ValueError("Unsupported file format. Please provide a CSV, Excel, or JSON file.")
+    
+    for row in df.iter_rows(named=True):
+        data_list.append(row['prompt'])
+    
+    return data_list

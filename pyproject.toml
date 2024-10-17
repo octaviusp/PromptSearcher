@@ -5,6 +5,9 @@ description = "PromptSearcher is an automatic tool designed to find the best pro
 authors = ["octaviopavon <octavio.pavon@botman-ai.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "prompt_searcher" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -19,7 +22,6 @@ matplotlib = "^3.9.2"
 [tool.poetry.dev-dependencies]
 pytest = "^7.4.3"
 python-dotenv = "^1.0.0"
-
 
 [build-system]
 requires = ["poetry-core"]

@@ -41,3 +41,6 @@ class NaiveSimilarity(LossFunction):
         average_score = total_score / len(y_pred)
         self.score_history.append(average_score)
         return average_score
+
+    def winner(self, previous_loss, new_loss) -> bool:
+        return True if new_loss > previous_loss else False

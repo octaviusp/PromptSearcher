@@ -134,3 +134,6 @@ dmypy.json
 cython_debug/
 
 # End Generation Here
+
+test_low_level.py
+test_high_level.py
