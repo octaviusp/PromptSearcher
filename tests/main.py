@@ -21,12 +21,12 @@ def main():
     dataset = load_dataset("tests/data/math.csv")
 
     model = GroqAgent(api_key=GROQ_API_KEY, model="llama-3.2-1b-preview")
-    evaluator = GroqAgent(api_key=GROQ_API_KEY, model="llama3-8b-8192")
-    augmentator = GroqAgent(api_key=GROQ_API_KEY, model="llama3-8b-8192")
+    evaluator = GroqAgent(api_key=GROQ_API_KEY, model="llama-3.1-70b-versatile")
+    augmentator = GroqAgent(api_key=GROQ_API_KEY, model="llama-3.1-70b-versatile")
 
     print("Step 2: Initialize score function and backpropagation")
     score_function = NaiveSimilarity(evaluator)
-    backpropagation = Backpropagation(augmentator, score_function)
+    backpropagation = Backpropagation(augmentator)
 
     print("Step 3: Set initial system message and number of epochs")
     objective_prompt = ObjectivePrompt("You are a math teacher") # -> Objective prompt to improve

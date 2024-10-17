@@ -67,39 +67,41 @@ class PromptSearch:
             print("*"*100)
             print(f"Epoch {i+1}/{self.epochs}")
             y_pred = []
-            if i > 0:
-                current_prompt = self.objective_prompt.get_best_prompt()[0]
-            else:
-                current_prompt = self.objective_prompt.get_last_prompt()
+
+            current_prompt = self.objective_prompt.get_last_prompt() # -> You're einstein in mathematics. Your goals is to explain it step by step like Richard Feymain.
             
+            print(f"****\nTesting prompt: {current_prompt}\n****")# ->  You're einstein in mathematics. Your goals is to explain it step by step like Richard Feymain.
             for input_prompt, _ in self.dataset:
                 response = self.student.generate_response(current_prompt, input_prompt)
                 y_pred.append(response)
             
-            current_score = self.score_function.score(y_pred, self.y_train)
+            current_score = self.score_function.score(y_pred, self.y_train) # -> Score of  You're einstein in mathematics. Your goals is to explain it step by step like Richard Feymain.
             if self.verbose:
                 print(f"Score: {current_score}")
             
             self.score_history.append(current_score)
-            self.objective_prompt.put_loss_to_last_prompt(current_score)
+            self.objective_prompt.put_loss_to_last_prompt(current_score) # ->  You're einstein in mathematics. Your goals is to explain it step by step like Richard Feymain.. put loss score.
             
-            if current_score > self.best_score:
-                self.best_score = current_score
-                self.best_prompt = current_prompt
-            
-            improved_prompt = self.backpropagation.optimize_prompt(
-                current_prompt, current_score
-            )
+            previous_prompt = current_prompt # ->  You're einstein in mathematics. Your goals is to explain it step by step like Richard Feymain.
 
-            if self.verbose:
-                print(f"Current prompt: {current_prompt}")
-                print(f"Improved prompt: {improved_prompt}")
+            if current_score > self.best_score: # -> At first epoch this always is true.
+                print(f"****\nNew best score: {current_score} with prompt: {current_prompt}\n****")
+                self.best_score = current_score # # ->  You're a math expert. Try to explain it in a simple way. Step by step.
+                self.best_prompt = current_prompt # # ->  You're a math expert. Try to explain it in a simple way. Step by step.
+                previous_prompt = None # -> None
+            else:
+                print(f"- No improvement with this prompt.")
+
+            improved_prompt = self.backpropagation.optimize_prompt(
+                self.best_prompt, self.best_score, previous_prompt=previous_prompt 
+            ) 
+
             self.objective_prompt.update(improved_prompt)
 
     def get_results(self) -> Tuple[str, float]:
         return self.best_prompt, self.best_score
 
-    def plot_score_history(self):
+    def plot_score_history(self, figsize: Tuple[int, int] = (10, 6)):
         """
         Plots the score history.
 
@@ -109,7 +111,7 @@ class PromptSearch:
         The plot is displayed with a title, x-axis labeled 'Epoch', y-axis labeled 'Score',
         and a grid for better readability.
         """
-        plt.figure(figsize=(10, 6))
+        plt.figure(figsize=figsize)
         plt.plot(range(1, len(self.score_history) + 1), self.score_history, 'b-')
         plt.title('Score History')
         plt.xlabel('Epoch')
