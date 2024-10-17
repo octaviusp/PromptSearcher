@@ -1,4 +1,4 @@
-![PromptSearcher Logo](./assets/prompt_searcher.webp)
+![PromptSearcher Logo](./assets/small_avatar.jpeg)
 
 # PromptSearcher
 
